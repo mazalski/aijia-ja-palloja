@@ -405,7 +405,13 @@ function calcStandings() {
     }
   }
 
-  return Object.entries(pts).map(([p,v])=>({player:p,...v}))
+  const result = Object.entries(pts).map(([p,v])=>({player:p,...v}));
+  // Add rawKeilaus from keilausDB after building result
+  for(const k of keilausDB) {
+    const s = result.find(r=>r.player===k.player);
+    if(s && k.raw_score!=null) s.rawKeilaus = k.raw_score;
+  }
+  return result
     .sort((a,b)=>b.total-a.total||b.wins-a.wins);
 }
 
