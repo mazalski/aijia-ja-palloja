@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>♂️ Äijiä ja Palloja ⚽ 2.5.2026</title>
+<title>🏆 Äijiä ja Palloja 2.5.2026</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   :root {
@@ -164,7 +164,7 @@
       <div class="loading">Ladataan tuloksia...</div>
     </div>
   </div>
-  <div class="info-box">⚖️ Sulkapallo, Pingis ja Racketball pisteet ×4/3 (max 40p). Keilaus: parempi kierros /7,5 (max 40p). Biljardi: max 40p.</div>
+  <div class="info-box">⚖️ Sulkapallo, Pingis ja Racketball pisteet ×4/3 (max 40p). Keilaus: parempi kierros ÷7,5 (max 40p). Biljardi: max 40p.</div>
 </div>
 
 <!-- SCHEDULE -->
@@ -490,18 +490,18 @@ function renderMatches(adminMode=false) {
         html += `<tr>
           <td class="time">${t}</td>
           <td class="player">${m1[0]} vs ${m1[1]}</td>
-          <td><input class="score-input ${r?.score1!=null?'saved':''}" type="number" min="0" max="99"
-            value="${s1}" data-sport="${sport.id}" data-slot="${si+1}" data-court="1" data-which="1"
+          <td><input class="score-input ${r?.score1!=null?'saved':''}" type="number" min="0"
+            value="${s1}" max="${sport.id==='biljardi'?8:6}" data-sport="${sport.id}" data-slot="${si+1}" data-court="1" data-which="1"
             data-p1="${m1[0]}" data-p2="${m1[1]}" onchange="handleScoreChange(this)"></td>
-          <td><input class="score-input ${r?.score2!=null?'saved':''}" type="number" min="0" max="99"
-            value="${s2}" data-sport="${sport.id}" data-slot="${si+1}" data-court="1" data-which="2"
+          <td><input class="score-input ${r?.score2!=null?'saved':''}" type="number" min="0"
+            value="${s2}" max="${sport.id==='biljardi'?8:6}" data-sport="${sport.id}" data-slot="${si+1}" data-court="1" data-which="2"
             data-p1="${m1[0]}" data-p2="${m1[1]}" onchange="handleScoreChange(this)"></td>
           <td class="player">${m2[0]} vs ${m2[1]}</td>
-          <td><input class="score-input ${r2?.score1!=null?'saved':''}" type="number" min="0" max="99"
-            value="${s3}" data-sport="${sport.id}" data-slot="${si+1}" data-court="2" data-which="1"
+          <td><input class="score-input ${r2?.score1!=null?'saved':''}" type="number" min="0"
+            value="${s3}" max="${sport.id==='biljardi'?8:6}" data-sport="${sport.id}" data-slot="${si+1}" data-court="2" data-which="1"
             data-p1="${m2[0]}" data-p2="${m2[1]}" onchange="handleScoreChange(this)"></td>
-          <td><input class="score-input ${r2?.score2!=null?'saved':''}" type="number" min="0" max="99"
-            value="${s4}" data-sport="${sport.id}" data-slot="${si+1}" data-court="2" data-which="2"
+          <td><input class="score-input ${r2?.score2!=null?'saved':''}" type="number" min="0"
+            value="${s4}" max="${sport.id==='biljardi'?8:6}" data-sport="${sport.id}" data-slot="${si+1}" data-court="2" data-which="2"
             data-p1="${m2[0]}" data-p2="${m2[1]}" onchange="handleScoreChange(this)"></td>
           <td class="referee">${ref[0]}<br>${ref[1]}</td></tr>`;
       } else {
@@ -536,7 +536,7 @@ function renderMatches(adminMode=false) {
               <td style="font-weight:600">${kp.player}</td>
               <td>${kp.group}</td>
               <td><input class="keilaus-score ${raw!==''?'saved':''}" type="number" min="0" max="300"
-                value="${raw}" data-player="${kp.player}" data-group="${kp.group}"
+                value="${raw}" max="300" data-player="${kp.player}" data-group="${kp.group}"
                 onchange="handleKeilausChange(this)"></td>
               <td class="official-score">${official}</td></tr>`;
             else return `<tr>
