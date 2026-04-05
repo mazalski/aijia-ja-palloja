@@ -126,6 +126,7 @@
   .info-box { background: var(--orange-light); border-left: 4px solid var(--orange);
     padding: 10px 14px; border-radius: 4px; font-size: 0.88rem; color: var(--orange); margin-bottom: 12px; }
   .max-pts { font-size: 0.78rem; color: var(--muted); }
+  .raw-pts { font-size: 0.7rem; color: #aaa; font-weight: normal; }
   @media (max-width: 600px) {
     .match-table { font-size: 0.8rem; }
     .score-input { width: 44px; font-size: 0.9rem; }
@@ -388,6 +389,10 @@ function calcStandings() {
       const v = Math.min(Math.round(rawPts[p]*meta.mult), meta.cap);
       pts[p][sport] = v;
       pts[p].total += v;
+      // Store raw pts for display
+      if(sport==='sulkapallo') pts[p].rawSulkapallo = rawPts[p];
+      if(sport==='pingis') pts[p].rawPingis = rawPts[p];
+      if(sport==='racketball') pts[p].rawRacketball = rawPts[p];
     });
   }
 
@@ -412,7 +417,7 @@ function renderStandings() {
     <table class="standings-table">
       <thead><tr>
         <th>Sija</th><th style="text-align:left">Pelaaja</th>
-        <th>🏸</th><th>🏓</th><th>🎾</th><th>🎱</th><th>🎳</th>
+        <th title='Normalisoitu / raakapisteet'>🏸</th><th title='Normalisoitu / raakapisteet'>🏓</th><th title='Normalisoitu / raakapisteet'>🎾</th><th>🎱</th><th>🎳</th>
         <th>YHT</th>
       </tr></thead>
       <tbody>
@@ -420,14 +425,16 @@ function renderStandings() {
           <tr class="${i===0?'rank-1':''}">
             <td>${medals[i]||i+1}</td>
             <td class="player-name">${s.player}</td>
-            <td>${s.sulkapallo||0}</td><td>${s.pingis||0}</td>
-            <td>${s.racketball||0}</td><td>${s.biljardi||0}</td>
-            <td>${s.keilaus||0}</td>
+            <td>${s.sulkapallo||0}<br><span class="raw-pts">${s.rawSulkapallo||0}</span></td>
+            <td>${s.pingis||0}<br><span class="raw-pts">${s.rawPingis||0}</span></td>
+            <td>${s.racketball||0}<br><span class="raw-pts">${s.rawRacketball||0}</span></td>
+            <td>${s.biljardi||0}</td>
+            <td>${s.keilaus||0}<br><span class="raw-pts">${s.rawKeilaus!=null?s.rawKeilaus:''}</span></td>
             <td class="total">${s.total}</td>
           </tr>`).join('')}
       </tbody>
     </table>
-    <p class="max-pts" style="margin-top:8px;text-align:right">Max per laji: 40p &nbsp;|&nbsp; Max yhteensä: 200p</p>`;
+    <p class="max-pts" style="margin-top:8px;text-align:right">Max per laji: 40p &nbsp;|&nbsp; Max yhteensä: 200p &nbsp;|&nbsp; Isot numerot = viralliset pisteet &nbsp;·&nbsp; <span style="color:#aaa">Pienet harmaat = raakapisteet</span></p>`;
 }
 
 function renderSchedule() {
