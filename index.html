@@ -150,6 +150,7 @@
   <button onclick="showTab('schedule-tab')">🗓️ Ohjelma</button>
   <button onclick="showTab('matches')">⚽ Ottelut</button>
   <button onclick="showTab('rules')">📋 Säännöt</button>
+  <button onclick="showTab('costs')">💰 Kustannukset</button>
   <button onclick="showTab('admin')">⚙️ Ylläpito</button>
 </nav>
 
@@ -186,6 +187,114 @@
   <div class="card">
     <div class="card-header" style="background:var(--blue);color:white;">📋 Säännöt & pisteytysjärjestelmä</div>
     <div class="card-body" id="rules-body"></div>
+  </div>
+</div>
+
+<!-- KUSTANNUKSET -->
+<div id="costs" class="tab-content">
+  <div class="card">
+    <div class="card-header" style="background:var(--dark-green,#375623);color:white;font-size:1.1rem;">
+      💰 Kustannukset – Äijiä ja Palloja 2.5.2026
+    </div>
+    <div class="card-body">
+
+      <p style="color:var(--muted);font-size:0.88rem;margin-bottom:16px;">
+        Yhteiset kulut jaetaan tasan 8 osallistujan kesken. Ruoka, juomat ja muut henkilökohtaiset kulut ovat omakustanteisia.
+      </p>
+
+      <!-- Talihalli -->
+      <div style="margin-bottom:20px;">
+        <div style="background:var(--blue-mid,#2E75B6);color:white;padding:10px 14px;border-radius:8px 8px 0 0;font-weight:bold;">
+          🏸 Talihalli – kenttävaraukset
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+          <thead>
+            <tr style="background:var(--blue-light,#DEEAF1);">
+              <th style="padding:8px 12px;text-align:left;">Varaus</th>
+              <th style="padding:8px 12px;text-align:center;">Aika</th>
+              <th style="padding:8px 12px;text-align:right;">Hinta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding:8px 12px;">Sulkapallo 5</td><td style="text-align:center;color:#6b7280;">10:00–11:00</td><td style="text-align:right;padding:8px 12px;">23 €</td></tr>
+            <tr style="background:#f9fafb;"><td style="padding:8px 12px;">Sulkapallo 6</td><td style="text-align:center;color:#6b7280;">10:00–11:00</td><td style="text-align:right;padding:8px 12px;">23 €</td></tr>
+            <tr><td style="padding:8px 12px;">Pingis 1</td><td style="text-align:center;color:#6b7280;">11:00–12:00</td><td style="text-align:right;padding:8px 12px;">10 €</td></tr>
+            <tr style="background:#f9fafb;"><td style="padding:8px 12px;">Pingis 2</td><td style="text-align:center;color:#6b7280;">11:00–12:00</td><td style="text-align:right;padding:8px 12px;">10 €</td></tr>
+            <tr><td style="padding:8px 12px;">Squash/Racketball 5</td><td style="text-align:center;color:#6b7280;">12:30–13:30</td><td style="text-align:right;padding:8px 12px;">22 €</td></tr>
+            <tr style="background:#f9fafb;"><td style="padding:8px 12px;">Squash/Racketball 6</td><td style="text-align:center;color:#6b7280;">12:30–13:30</td><td style="text-align:right;padding:8px 12px;">22 €</td></tr>
+            <tr><td style="padding:8px 12px;">VIP-Pukuhuone</td><td style="text-align:center;color:#6b7280;">13:30–15:00</td><td style="text-align:right;padding:8px 12px;">20 €</td></tr>
+            <tr style="background:var(--blue-light,#DEEAF1);font-weight:bold;">
+              <td style="padding:8px 12px;" colspan="2">Yhteensä</td>
+              <td style="text-align:right;padding:8px 12px;">130 €</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Talin keilahalli -->
+      <div style="margin-bottom:20px;">
+        <div style="background:var(--teal,#1D6060);color:white;padding:10px 14px;border-radius:8px 8px 0 0;font-weight:bold;">
+          🎳 Talin keilahalli – Superranneke + keilakengät
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+          <thead>
+            <tr style="background:var(--teal-light,#D0F0F0);">
+              <th style="padding:8px 12px;text-align:left;">Kulu</th>
+              <th style="padding:8px 12px;text-align:center;">á-hinta</th>
+              <th style="padding:8px 12px;text-align:center;">Hlö</th>
+              <th style="padding:8px 12px;text-align:right;">Yhteensä</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:8px 12px;">Superranneke (keilaus + biljardi + darts)</td>
+              <td style="text-align:center;">30 €</td>
+              <td style="text-align:center;">8</td>
+              <td style="text-align:right;padding:8px 12px;">240 €</td>
+            </tr>
+            <tr style="background:#f9fafb;">
+              <td style="padding:8px 12px;">Keilakenkien vuokra</td>
+              <td style="text-align:center;">3 €</td>
+              <td style="text-align:center;">8</td>
+              <td style="text-align:right;padding:8px 12px;">24 €</td>
+            </tr>
+            <tr style="background:var(--teal-light,#D0F0F0);font-weight:bold;">
+              <td style="padding:8px 12px;" colspan="3">Yhteensä</td>
+              <td style="text-align:right;padding:8px 12px;">264 €</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Yhteenveto -->
+      <div style="background:var(--yellow,#FFF2CC);border-radius:8px;padding:16px 20px;margin-bottom:16px;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.95rem;">
+          <tr>
+            <td style="padding:4px 0;color:#6b7280;">Talihalli</td>
+            <td style="text-align:right;padding:4px 0;">130 €</td>
+          </tr>
+          <tr>
+            <td style="padding:4px 0;color:#6b7280;">Talin keilahalli</td>
+            <td style="text-align:right;padding:4px 0;">264 €</td>
+          </tr>
+          <tr style="border-top:2px solid #BF9000;margin-top:8px;">
+            <td style="padding:8px 0 4px;font-weight:bold;font-size:1.05rem;">💰 Yhteensä</td>
+            <td style="text-align:right;padding:8px 0 4px;font-weight:bold;font-size:1.05rem;">394 €</td>
+          </tr>
+          <tr>
+            <td style="padding:4px 0;font-weight:bold;color:var(--blue,#1F4E79);font-size:1.1rem;">👤 Per henkilö (8 hlö)</td>
+            <td style="text-align:right;padding:4px 0;font-weight:bold;color:var(--blue,#1F4E79);font-size:1.3rem;">49,25 €</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Omakustanteiset -->
+      <div style="background:var(--orange-light,#FCE4D6);border-left:4px solid var(--orange,#833C00);padding:12px 16px;border-radius:4px;font-size:0.88rem;color:var(--orange,#833C00);">
+        🍕 <strong>Ruoka, juomat ja muut henkilökohtaiset kulut ovat omakustanteisia</strong> – jokainen päättää niistä itse. 
+        VIP-tilassa voi tilata Talihallin ravintolasta sämpylöitä ja juomia, tai tilata esim. pizzaa muualta.
+      </div>
+
+    </div>
   </div>
 </div>
 
