@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🏆 Äijiä ja Palloja 2.5.2026</title>
+<title>🏆 Äijiä ja Palloja 3.5.2026</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   :root {
@@ -13,10 +13,10 @@
     --purple: #4B0082; --purple-light: #EAD1FF;
     --teal: #1D6060; --teal-light: #D0F0F0;
     --yellow: #FFF2CC; --gold: #BF9000;
-    --bg: #f4f6f9; --card: #ffffff;
+    --bg: #f4f6f9; --card: #ffffff
     --text: #1a1a2e; --muted: #6b7280;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; 
   body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); }
 
   /* HEADER */
@@ -142,7 +142,7 @@
 
 <div class="header">
   <h1>🏆 Äijiä ja Palloja</h1>
-  <p>2.5.2026 &nbsp;·&nbsp; Talihalli + Talin keilahalli &nbsp;·&nbsp; 8 pelaajaa</p>
+  <p>3.5.2026 &nbsp;·&nbsp; Talihalli + Talin keilahalli &nbsp;·&nbsp; 8 pelaajaa</p>
 </div>
 
 <nav class="nav">
@@ -194,7 +194,7 @@
 <div id="costs" class="tab-content">
   <div class="card">
     <div class="card-header" style="background:var(--dark-green,#375623);color:white;font-size:1.1rem;">
-      💰 Kustannukset – Äijiä ja Palloja 2.5.2026
+      💰 Kustannukset – Äijiä ja Palloja 3.5.2026
     </div>
     <div class="card-body">
 
@@ -328,7 +328,7 @@ const ADMIN_PW = 'aijia2026';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
-const PLAYERS = ['Anton','Antti','Eero','Erkka','Jussi','Lauri','Markku','Matti'];
+const PLAYERS = ['Anton','Antti','Eero','Erkka','Viljami','Lauri','Markku','Matti'];
 
 const SPORT_META = [
   {id:'sulkapallo', name:'Sulkapallo', emoji:'🏸', cls:'sport-sulkapallo', start:'10:00', court:'Kenttä', mult:4/3, cap:40},
@@ -339,7 +339,7 @@ const SPORT_META = [
 
 // Deterministic schedules (same seeds as xlsx)
 function genSchedule(seed) {
-  const players = ['Anton','Matti','Lauri','Markku','Erkka','Antti','Eero','Jussi'];
+  const players = ['Anton','Matti','Lauri','Markku','Erkka','Antti','Eero','Viljami'];
   const rounds = [
     [[0,7],[1,6],[2,5],[3,4]],[[0,6],[7,5],[1,4],[2,3]],
     [[0,5],[6,4],[7,3],[1,2]],[[0,4],[5,3],[6,2],[7,1]],
@@ -419,7 +419,7 @@ const REFS = Object.fromEntries(Object.entries(SCHEDULES).map(([k,v])=>[k,assign
 const KEILAUS_PLAYERS = [
   {player:'Anton',group:'A – Rata 1'},{player:'Antti',group:'A – Rata 1'},
   {player:'Eero',group:'A – Rata 1'},{player:'Erkka',group:'A – Rata 1'},
-  {player:'Jussi',group:'B – Rata 2'},{player:'Lauri',group:'B – Rata 2'},
+  {player:'Viljami',group:'B – Rata 2'},{player:'Lauri',group:'B – Rata 2'},
   {player:'Markku',group:'B – Rata 2'},{player:'Matti',group:'B – Rata 2'},
 ];
 
@@ -567,8 +567,8 @@ function renderSchedule() {
     {time:'16:30',act:'⏸️ TAUKO 30 min',note:'',sport:false},
     {time:'17:00',act:'🎳 KEILAUS',note:'1h yksilösuoritus – 2 rataa – 2 kierrosta, parempi lasketaan',sport:true},
     {time:'18:00',act:'🏆 LOPETUS & palkintojen jako!',note:'Paras pelaaja kruunataan',sport:false},
-    {time:'18:30',act:'🍕 Illallinen & jälkijuhlat',note:'',sport:false},
-    {time:'20:00',act:'🎯 BONUS: darts, biljardi, simulaattorit',note:'Ei virallisia pisteitä',sport:false},
+    {time:'18:30',act:"🍕 Illallinen – <a href='https://blondies.fi' target='_blank' style='color:inherit;font-weight:bold'>Blondie\'s Sports & Food</a>",note:'Pitäjänmäki – syöminen, jälkipelit & darts',sport:false},
+    {time:'20:00',act:"🎯 Darts & biljardi – <a href='https://blondies.fi' target='_blank' style='color:inherit'>Blondie\'sillä</a>",note:'Ei virallisia pisteitä – omaan tahtiin',sport:false},
   ];
   document.getElementById('schedule-body').innerHTML = items.map(it=>`
     <div class="schedule-item ${it.sport?'schedule-sport':''}">
@@ -722,7 +722,7 @@ function renderRules() {
       ['Säännöt','sbil.fi/pool/saannot/8-pallo/'],
     ]},
     {title:'🎳 Keilaus', rows:[
-      ['Formaatti','Yksilösuoritus. Ryhmä A (Anton, Antti, Eero, Erkka) → Rata 1. Ryhmä B (Jussi, Lauri, Markku, Matti) → Rata 2.'],
+      ['Formaatti','Yksilösuoritus. Ryhmä A (Anton, Antti, Eero, Erkka) → Rata 1. Ryhmä B (Viljami, Lauri, Markku, Matti) → Rata 2.'],
       ['Pisteet','Keilataan 2 kierrosta. Paremman kierroksen kaatopisteet ÷ 7,5 = viralliset pisteet. Max 40p (300÷7,5).'],
       ['Esimerkki','Kierros 1: 142p, Kierros 2: 165p → syötetään 165 → 165÷7,5 = 22 pistettä.'],
     ]},
