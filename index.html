@@ -487,9 +487,9 @@ function calcStandings() {
     let rawPts = {}; PLAYERS.forEach(p=>rawPts[p]=0);
     const rows = scoresDB.filter(r=>r.sport===sport);
     for(const r of rows) {
-      if(r.score1!=null) { rawPts[r.player1]=(rawPts[r.player1]||0)+r.score1; }
-      if(r.score2!=null) { rawPts[r.player2]=(rawPts[r.player2]||0)+r.score2; }
-      if(r.score1!=null && r.score2!=null) {
+      if(r.score1!=null && pts[r.player1]) { rawPts[r.player1]=(rawPts[r.player1]||0)+r.score1; }
+      if(r.score2!=null && pts[r.player2]) { rawPts[r.player2]=(rawPts[r.player2]||0)+r.score2; }
+      if(r.score1!=null && r.score2!=null && pts[r.player1] && pts[r.player2]) {
         if(r.score1>r.score2) pts[r.player1].wins++;
         else if(r.score2>r.score1) pts[r.player2].wins++;
       }
