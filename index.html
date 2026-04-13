@@ -554,20 +554,20 @@ function renderStandings() {
 
 function renderSchedule() {
   const items = [
-    {time:'09:30',act:'Saapuminen ja pukuhuoneet',note:'',sport:false},
-    {time:'09:45',act:'Alkulämmöt & verryttely',note:'Pelisysteemien kertaus',sport:false},
+    {time:'09:15',act:'Saapuminen ja pukuhuoneet',note:'Talihalli, Huopalahdentie 28',sport:false},
+    {time:'09:30',act:'Alkulämmöt & verryttely',note:'Pelisysteemien kertaus',sport:false},
     {time:'10:00',act:'🏸 SULKAPALLO',note:'14 kierrosta × 4 min – kaikki kaikkia vastaan',sport:true},
     {time:'11:00',act:'🏓 PINGIS',note:'14 kierrosta × 4 min – kaikki kaikkia vastaan',sport:true},
     {time:'12:00',act:'☕ TAUKO 30 min',note:'Happihyppely & snacksit',sport:false},
     {time:'12:30',act:'🎾 RACKETBALL',note:'14 kierrosta × 4 min – kaikki kaikkia vastaan',sport:true},
     {time:'13:30',act:'🧖 VIP-SAUNA',note:'Suihku, vaihto, pisteiden välilaskenta',sport:false},
     {time:'14:00',act:'🍽️ Kenttälounas',note:'Sämpylät, juomat, kahvi, pulla',sport:false},
-    {time:'15:00',act:'🚶 Siirtyminen Talin keilahalliin',note:'',sport:false},
+    {time:'15:00',act:'🚶 Siirtyminen Talin keilahalliin',note:'Talihallin viereinen rakennus',sport:false},
     {time:'15:30',act:'🎱 BILJARDI',note:'14 kierrosta × 4 min – kaikki kaikkia vastaan',sport:true},
-    {time:'16:30',act:'⏸️ TAUKO 30 min',note:'',sport:false},
+    {time:'16:30',act:'⏸️ TAUKO 30 min',note:'Omien eväiden hörps ja slurps',sport:false},
     {time:'17:00',act:'🎳 KEILAUS',note:'1h yksilösuoritus – 2 rataa – 2 kierrosta, parempi lasketaan',sport:true},
     {time:'18:00',act:'🏆 LOPETUS & palkintojen jako!',note:'Paras pelaaja kruunataan',sport:false},
-    {time:'18:30',act:"🍕 Illallinen – <a href='https://blondies.fi' target='_blank' style='color:inherit;font-weight:bold'>Blondie\'s Sports & Food</a>",note:'Pitäjänmäki – syöminen, jälkipelit & darts',sport:false},
+    {time:'18:30',act:"🍕 Illallinen – <a href='https://blondies.fi' target='_blank' style='color:inherit;font-weight:bold'>Blondie\'s Sports & Food</a>",note:'Valimotie 2: syöminen, jälkipelit',sport:false},
     {time:'20:00',act:"🎯 Darts & biljardi – <a href='https://blondies.fi' target='_blank' style='color:inherit'>Blondie\'sillä</a>",note:'Ei virallisia pisteitä – omaan tahtiin',sport:false},
   ];
   document.getElementById('schedule-body').innerHTML = items.map(it=>`
