@@ -5,34 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🏆 Äijiä ja Palloja su 3.5.2026</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-function openResetModal(){
-  document.getElementById('resetConfirmInput').value='';
-  document.getElementById('resetConfirmInput').classList.remove('error');
-  document.getElementById('resetModal').classList.add('active');
-  setTimeout(()=>document.getElementById('resetConfirmInput').focus(),100);
-}
-function closeResetModal(){
-  document.getElementById('resetModal').classList.remove('active');
-}
-async function confirmReset(){
-  const val=document.getElementById('resetConfirmInput').value.trim().toUpperCase();
-  if(val!=='NOLLAA'){document.getElementById('resetConfirmInput').classList.add('error');return;}
-  const r1=await sb.from('scores').delete().gt('updated_at','2000-01-01');
-  const r2=await sb.from('keilaus').delete().gt('updated_at','2000-01-01');
-  if(!r1.error&&!r2.error){
-    scoresDB=[];keilausDB=[];
-    renderStandings();renderMatches(false);
-    closeResetModal();
-    alert('✅ Kaikki tulokset nollattu!');
-  } else {
-    alert('❌ Virhe: '+(r1.error?.message||r2.error?.message));
-  }
-}
-document.addEventListener('DOMContentLoaded',()=>{
-  const overlay=document.getElementById('resetModal');
-  if(overlay)overlay.addEventListener('click',function(e){if(e.target===this)closeResetModal();});
-});
-</script>
 <style>
   :root {
     --blue: #1F4E79; --blue-mid: #2E75B6; --blue-light: #DEEAF1;
@@ -823,6 +795,11 @@ sb.channel('keilaus').on('postgres_changes',{event:'*',schema:'public',table:'ke
   renderMatches(false);
   renderRules();
 })();
+
+function openResetModal(){document.getElementById('resetConfirmInput').value='';document.getElementById('resetConfirmInput').classList.remove('error');document.getElementById('resetModal').classList.add('active');setTimeout(()=>document.getElementById('resetConfirmInput').focus(),100);}
+function closeResetModal(){document.getElementById('resetModal').classList.remove('active');}
+async function confirmReset(){var val=document.getElementById('resetConfirmInput').value.trim().toUpperCase();if(val!=='NOLLAA'){document.getElementById('resetConfirmInput').classList.add('error');return;}var r1=await sb.from('scores').delete().gt('updated_at','2000-01-01');var r2=await sb.from('keilaus').delete().gt('updated_at','2000-01-01');if(!r1.error&&!r2.error){scoresDB=[];keilausDB=[];renderStandings();renderMatches(false);closeResetModal();alert('Kaikki tulokset nollattu!');}else{alert('Virhe: '+(r1.error?.message||r2.error?.message));}}
+document.addEventListener('DOMContentLoaded',function(){var o=document.getElementById('resetModal');if(o)o.addEventListener('click',function(e){if(e.target===this)closeResetModal();});});
 </script>
 
 <!-- Nollaa-modaali -->
