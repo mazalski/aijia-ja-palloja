@@ -4,7 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🏆 Äijiä ja Palloja su 3.5.2026</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+function openResetModal(){
+  document.getElementById('resetConfirmInput').value='';
+  document.getElementById('resetConfirmInput').classList.remove('error');
+  document.getElementById('resetModal').classList.add('active');
+  setTimeout(()=>document.getElementById('resetConfirmInput').focus(),100);
+}
+function closeResetModal(){
+  document.getElementById('resetModal').classList.remove('active');
+}
+async function confirmReset(){
+  const val=document.getElementById('resetConfirmInput').value.trim().toUpperCase();
+  if(val!=='NOLLAA'){document.getElementById('resetConfirmInput').classList.add('error');return;}
+  const r1=await sb.from('scores').delete().gt('updated_at','2000-01-01');
+  const r2=await sb.from('keilaus').delete().gt('updated_at','2000-01-01');
+  if(!r1.error&&!r2.error){
+    scoresDB=[];keilausDB=[];
+    renderStandings();renderMatches(false);
+    closeResetModal();
+    alert('✅ Kaikki tulokset nollattu!');
+  } else {
+    alert('❌ Virhe: '+(r1.error?.message||r2.error?.message));
+  }
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const overlay=document.getElementById('resetModal');
+  if(overlay)overlay.addEventListener('click',function(e){if(e.target===this)closeResetModal();});
+});
+</script>
 <style>
   :root {
     --blue: #1F4E79; --blue-mid: #2E75B6; --blue-light: #DEEAF1;
@@ -136,6 +164,19 @@
   .live-dot { display: inline-block; width: 8px; height: 8px; background: #22c55e;
     border-radius: 50%; margin-right: 6px; animation: pulse 1.5s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* Nollaa-modaali */
+.reset-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;align-items:center;justify-content:center;}
+.reset-modal-overlay.active{display:flex;}
+.reset-modal{background:#fff;border-radius:12px;padding:32px;max-width:420px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,0.3);text-align:center;}
+.reset-modal h3{color:#c0392b;margin-bottom:12px;font-size:1.2rem;}
+.reset-modal p{color:#555;margin-bottom:20px;font-size:0.95rem;}
+.reset-modal input{width:100%;padding:10px;border:2px solid #ddd;border-radius:8px;font-size:1.1rem;text-align:center;letter-spacing:2px;margin-bottom:16px;box-sizing:border-box;}
+.reset-modal input.error{border-color:#e74c3c;}
+.reset-modal-btns{display:flex;gap:12px;justify-content:center;}
+.btn-reset-confirm{background:#e74c3c;color:#fff;border:none;padding:10px 24px;border-radius:8px;font-weight:bold;cursor:pointer;font-size:1rem;}
+.btn-reset-confirm:hover{background:#c0392b;}
+.btn-reset-cancel{background:#eee;color:#333;border:none;padding:10px 24px;border-radius:8px;font-weight:bold;cursor:pointer;font-size:1rem;}
 </style>
 </head>
 <body>
@@ -312,6 +353,10 @@
   <div id="admin-panel" style="display:none">
     <div class="info-box">⚙️ <strong>Ylläpitotila</strong> – Syötä tulokset alla. Tulokset tallentuvat automaattisesti kaikille näkyviin.</div>
     <div id="admin-matches-body"></div>
+    <div style="margin-top:40px;text-align:center;padding-top:24px;border-top:2px dashed #e74c3c;">
+      <p style="color:#999;font-size:0.85rem;margin-bottom:12px;">⚠️ Vaara-alue</p>
+      <button onclick="openResetModal()" style="background:#e74c3c;color:#fff;border:none;padding:12px 28px;border-radius:8px;font-weight:bold;cursor:pointer;font-size:1rem;">🗑️ Nollaa kaikki tulokset</button>
+    </div>
   </div>
 </div>
 
@@ -328,7 +373,7 @@ const ADMIN_PW = 'aijia2026';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
-const PLAYERS = ['Anton','Antti','Eero','Erkka','Viljami','Lauri','Markku','Matti'];
+const PLAYERS = ['Anton','Antti','Eero','Erkka','Lauri','Markku','Matti','Viljami'];
 
 const SPORT_META = [
   {id:'sulkapallo', name:'Sulkapallo', emoji:'🏸', cls:'sport-sulkapallo', start:'10:00', court:'Kenttä', mult:4/3, cap:40},
@@ -779,5 +824,18 @@ sb.channel('keilaus').on('postgres_changes',{event:'*',schema:'public',table:'ke
   renderRules();
 })();
 </script>
+
+<!-- Nollaa-modaali -->
+<div class="reset-modal-overlay" id="resetModal">
+  <div class="reset-modal">
+    <h3>⚠️ Nollaa kaikki tulokset?</h3>
+    <p>Tämä poistaa <strong>kaikki pisteet</strong> pysyvästi tietokannasta.<br>Kirjoita <strong>NOLLAA</strong> vahvistaaksesi.</p>
+    <input type="text" id="resetConfirmInput" placeholder="NOLLAA" autocomplete="off">
+    <div class="reset-modal-btns">
+      <button class="btn-reset-cancel" onclick="closeResetModal()">Peruuta</button>
+      <button class="btn-reset-confirm" onclick="confirmReset()">Nollaa tulokset</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
